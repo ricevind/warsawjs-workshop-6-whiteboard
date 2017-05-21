@@ -2,6 +2,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Links } from '../../api/links/links.js';
+import { Rooms } from '../../api/rooms/rooms.js';
 
 Meteor.startup(() => {
   // if the Links collection is empty
@@ -28,7 +29,9 @@ Meteor.startup(() => {
         createdAt: new Date(),
       },
     ];
-
     data.forEach(link => Links.insert(link));
+  }
+  if (Rooms.find().count() === 0) {
+    Rooms.insert({title:'first', createdAt: new Date()})
   }
 });

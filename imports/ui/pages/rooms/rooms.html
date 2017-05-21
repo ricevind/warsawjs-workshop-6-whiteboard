@@ -1,0 +1,10 @@
+<template name="App_room">
+  <h2>{{room.title}}</h2>
+  <div class="back"><a href="{{pathFor 'App.home'}}">G back</a></div>
+  <canvas height="500" width="500" id="canvas"></canvas>
+  <div>
+    <button id="clear">Clear canvas</button>
+    <input type="number" id="size_input">
+    <input type="color" id="color">
+  </div>
+</template>
