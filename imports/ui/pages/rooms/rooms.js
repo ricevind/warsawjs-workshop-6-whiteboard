@@ -41,12 +41,17 @@ Template.App_room.events({
   'keyup #size_input': (event)=> {
     event.preventDefault();
     canvas_manager.size = +$('#size_input').val();    
-    console.log($('#size_input').val())
   },
   'change #color': (event)=> {
     event.preventDefault();
     canvas_manager.color = $('#color').val();    
-    console.log($('#color').val())
+  },
+  'change #file': (event)=> {
+    event.preventDefault();
+    console.log(event.target.value)
+    const file = event.target.files[0];
+    readImage(file)   
+    
   }
 
 })
@@ -58,9 +63,19 @@ Template.App_room.helpers({
       canvas_manager.load(room.dataUrl);
       if (room.dataUrl === '') {
        canvas_manager.clear(false);
-    }
+      }
     }
     
     return Rooms.findOne(FlowRouter.getParam('id'));
   }
 });
+
+function readImage(file) {
+        console.log(file)
+        var FR= new FileReader();
+        FR.onload = function(e) {
+            canvas_manager.load(e.target.result)
+    }
+     FR.readAsDataURL(file);
+        console.log(FR)
+}
